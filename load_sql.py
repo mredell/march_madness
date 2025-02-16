@@ -8,7 +8,7 @@ def main(args):
         pass
     else:
         engine = connect.get_engine()
-        load.process_csv_folder(FOLDER, engine=engine)
+        load.process_csv_folder(FOLDER, engine=engine, schema=args.schema)
         pass
 
 def parse_args():

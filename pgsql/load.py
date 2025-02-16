@@ -17,7 +17,7 @@ def infer_sqlalchemy_types(df):
             type_mapping[col] = String  # Default to TEXT
     return type_mapping
 
-def process_csv_folder(folder_path, engine):
+def process_csv_folder(folder_path, engine, schema):
     """Iterate over CSVs in a folder and import them as tables."""
     for filename in os.listdir(folder_path):
         if filename.endswith(".csv"):
@@ -40,7 +40,14 @@ def process_csv_folder(folder_path, engine):
             dtype_mapping = infer_sqlalchemy_types(df)
 
             # Import CSV into PostgreSQL
-            df.to_sql(table_name, engine, schema="raw", if_exists="replace", index=False, dtype=dtype_mapping)
+            df.to_sql(
+                table_name, 
+                engine, 
+                schema=schema, 
+                if_exists="replace", 
+                index=False, 
+                dtype=dtype_mapping
+            )
 
             print(f"✅ Imported {filename} into PostgreSQL as {table_name}\n")
     pass
