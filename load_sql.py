@@ -17,14 +17,23 @@ def parse_args():
     parser.add_argument(
         "--folder", 
         type=str, 
-        default="data", 
+        default="data",
+        required=False, 
         help="The path to the data folder. Default: `data`"
+    )
+    parser.add_argument(
+        "--schema",
+        type=str,
+        required=False,
+        default="raw",
+        help="Target schema to load in the database. Default: `raw`"
     )
     parser.add_argument(
         "--skip",
         type=bool,
+        required=False,
         default=False,
-        help="Option to skip data load into database. Default: False."
+        help="Option to skip data load into database. Default: False"
     )
     args = parser.parse_args()
     return args
